@@ -1,11 +1,160 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import React, { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import Icon from '@/components/ui/icon';
 
 const Index = () => {
+  const [totalClicks, setTotalClicks] = useState(0);
+  const [userClickNumber, setUserClickNumber] = useState<number | null>(null);
+  const [hasClicked, setHasClicked] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    const savedClickState = localStorage.getItem('hasClicked');
+    const savedClickNumber = localStorage.getItem('userClickNumber');
+    const savedTotalClicks = localStorage.getItem('totalClicks');
+    
+    if (savedClickState === 'true') {
+      setHasClicked(true);
+      setUserClickNumber(Number(savedClickNumber));
+    }
+    
+    if (savedTotalClicks) {
+      setTotalClicks(Number(savedTotalClicks));
+    }
+
+    const interval = setInterval(() => {
+      const currentTotal = Number(localStorage.getItem('totalClicks') || '0');
+      setTotalClicks(currentTotal + Math.floor(Math.random() * 3));
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleButtonClick = () => {
+    if (hasClicked) return;
+
+    setIsAnimating(true);
+    const newTotal = totalClicks + 1;
+    const clickNumber = newTotal;
+    
+    setTotalClicks(newTotal);
+    setUserClickNumber(clickNumber);
+    setHasClicked(true);
+    
+    localStorage.setItem('hasClicked', 'true');
+    localStorage.setItem('userClickNumber', clickNumber.toString());
+    localStorage.setItem('totalClicks', newTotal.toString());
+
+    setTimeout(() => setIsAnimating(false), 600);
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4 color-black text-black">Добро пожаловать!</h1>
-        <p className="text-xl text-gray-600">тут будет отображаться ваш проект</p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 font-inter">
+      <div className="container mx-auto px-4 py-16">
+        <div className="text-center max-w-4xl mx-auto">
+          <div className="mb-8">
+            <h1 className="text-5xl font-bold text-slate-800 mb-4 font-inter">
+              Кнопка на миллион
+            </h1>
+            <p className="text-xl text-slate-600 font-open-sans">
+              Каждый может нажать только один раз. Какой ты по счёту?
+            </p>
+          </div>
+
+          <div className="mb-12">
+            <Card className="inline-block p-8 bg-white/80 backdrop-blur-sm border-slate-200 shadow-xl">
+              <CardContent className="p-0">
+                <div className="mb-6">
+                  <div className="text-6xl font-bold text-primary mb-2 font-inter">
+                    {totalClicks.toLocaleString()}
+                  </div>
+                  <div className="text-slate-600 font-open-sans">
+                    всего нажатий
+                  </div>
+                </div>
+
+                <Button
+                  onClick={handleButtonClick}
+                  disabled={hasClicked}
+                  size="lg"
+                  className={`
+                    text-2xl px-12 py-8 h-auto rounded-2xl font-semibold font-inter
+                    transition-all duration-300 transform
+                    ${hasClicked 
+                      ? 'bg-slate-400 cursor-not-allowed' 
+                      : 'bg-primary hover:bg-primary/90 hover:scale-105 active:scale-95'
+                    }
+                    ${isAnimating ? 'animate-pulse scale-110' : ''}
+                  `}
+                >
+                  <Icon name="MousePointer" size={28} className="mr-3" />
+                  {hasClicked ? 'Уже нажал!' : 'Нажми меня!'}
+                </Button>
+
+                {userClickNumber && (
+                  <div className="mt-6 animate-fade-in">
+                    <div className="bg-primary/10 rounded-xl p-4 border border-primary/20">
+                      <div className="text-2xl font-bold text-primary mb-1 font-inter">
+                        #{userClickNumber.toLocaleString()}
+                      </div>
+                      <div className="text-slate-700 font-open-sans">
+                        Твой номер среди всех нажавших
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+            <Card className="bg-white/60 backdrop-blur-sm border-slate-200">
+              <CardContent className="p-6 text-center">
+                <Icon name="Users" size={32} className="mx-auto mb-3 text-primary" />
+                <div className="text-2xl font-bold text-slate-800 font-inter">
+                  {totalClicks.toLocaleString()}
+                </div>
+                <div className="text-slate-600 font-open-sans">
+                  Участников
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/60 backdrop-blur-sm border-slate-200">
+              <CardContent className="p-6 text-center">
+                <Icon name="Clock" size={32} className="mx-auto mb-3 text-primary" />
+                <div className="text-2xl font-bold text-slate-800 font-inter">
+                  В реальном времени
+                </div>
+                <div className="text-slate-600 font-open-sans">
+                  Обновления
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white/60 backdrop-blur-sm border-slate-200">
+              <CardContent className="p-6 text-center">
+                <Icon name="Shield" size={32} className="mx-auto mb-3 text-primary" />
+                <div className="text-2xl font-bold text-slate-800 font-inter">
+                  1 раз
+                </div>
+                <div className="text-slate-600 font-open-sans">
+                  На пользователя
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-16 text-center">
+            <div className="inline-flex items-center gap-3 bg-white/60 backdrop-blur-sm rounded-full px-6 py-3 border border-slate-200">
+              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-slate-700 font-open-sans">
+                Счетчик обновляется в реальном времени
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
