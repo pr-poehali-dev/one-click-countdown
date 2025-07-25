@@ -53,14 +53,7 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 font-inter">
       <div className="container mx-auto px-4 py-16">
         <div className="text-center max-w-4xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-5xl font-bold text-slate-800 mb-4 font-inter">
-              Кнопка на миллион
-            </h1>
-            <p className="text-xl text-slate-600 font-open-sans">
-              Каждый может нажать только один раз. Какой ты по счёту?
-            </p>
-          </div>
+
 
           <div className="mb-12">
             <Card className="inline-block p-8 bg-white/80 backdrop-blur-sm border-slate-200 shadow-xl">
