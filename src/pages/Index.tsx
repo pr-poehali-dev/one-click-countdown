@@ -103,12 +103,24 @@ const Index = () => {
 
 
 
-          <div className="mt-16 text-center">
+          <div className="mt-16 text-center space-y-4">
             <div className="inline-flex items-center gap-3 bg-white/60 backdrop-blur-sm rounded-full px-6 py-3 border border-slate-200">
               <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
               <span className="text-slate-700 font-open-sans">
                 Счетчик обновляется в реальном времени
               </span>
+            </div>
+            
+            <div>
+              <a 
+                href="https://youtube.com/@som456" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-slate-600 hover:text-primary transition-colors font-open-sans"
+              >
+                <Icon name="Youtube" size={20} />
+                YouTube: som456
+              </a>
             </div>
           </div>
         </div>
