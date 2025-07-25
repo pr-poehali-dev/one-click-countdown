@@ -113,13 +113,13 @@ const Index = () => {
             
             <div>
               <a 
-                href="https://youtube.com/@som456" 
+                href="https://youtube.com/@somsom-v_1.0" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-slate-600 hover:text-primary transition-colors font-open-sans"
               >
                 <Icon name="Youtube" size={20} />
-                YouTube: som456
+                YouTube: somsom-v_1.0
               </a>
             </div>
           </div>
