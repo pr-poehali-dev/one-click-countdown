@@ -108,43 +108,7 @@ const Index = () => {
             </Card>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-            <Card className="bg-white/60 backdrop-blur-sm border-slate-200">
-              <CardContent className="p-6 text-center">
-                <Icon name="Users" size={32} className="mx-auto mb-3 text-primary" />
-                <div className="text-2xl font-bold text-slate-800 font-inter">
-                  {totalClicks.toLocaleString()}
-                </div>
-                <div className="text-slate-600 font-open-sans">
-                  Участников
-                </div>
-              </CardContent>
-            </Card>
 
-            <Card className="bg-white/60 backdrop-blur-sm border-slate-200">
-              <CardContent className="p-6 text-center">
-                <Icon name="Clock" size={32} className="mx-auto mb-3 text-primary" />
-                <div className="text-2xl font-bold text-slate-800 font-inter">
-                  В реальном времени
-                </div>
-                <div className="text-slate-600 font-open-sans">
-                  Обновления
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white/60 backdrop-blur-sm border-slate-200">
-              <CardContent className="p-6 text-center">
-                <Icon name="Shield" size={32} className="mx-auto mb-3 text-primary" />
-                <div className="text-2xl font-bold text-slate-800 font-inter">
-                  1 раз
-                </div>
-                <div className="text-slate-600 font-open-sans">
-                  На пользователя
-                </div>
-              </CardContent>
-            </Card>
-          </div>
 
           <div className="mt-16 text-center">
             <div className="inline-flex items-center gap-3 bg-white/60 backdrop-blur-sm rounded-full px-6 py-3 border border-slate-200">
