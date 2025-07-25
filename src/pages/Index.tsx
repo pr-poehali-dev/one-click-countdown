@@ -56,7 +56,7 @@ const Index = () => {
 
 
           <div className="mb-12">
-            <Card className="inline-block p-8 bg-white/80 backdrop-blur-sm border-slate-200 shadow-xl">
+            <Card className="inline-block p-12 bg-white/80 backdrop-blur-sm border-slate-200 shadow-xl">
               <CardContent className="p-0">
                 <div className="mb-6">
                   <div className="text-6xl font-bold text-primary mb-2 font-inter">
