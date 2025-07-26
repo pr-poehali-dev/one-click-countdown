@@ -97,31 +97,5 @@
 
   body {
     @apply bg-background text-foreground;
-    overscroll-behavior: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  html {
-    overscroll-behavior: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  /* Убираем жёлтую полосу в мобильном Safari */
-  body, html {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  
-  /* Разрешаем выделение только для текстовых элементов */
-  input, textarea, [contenteditable] {
-    -webkit-user-select: text;
-    -khtml-user-select: text;
-    -moz-user-select: text;
-    -ms-user-select: text;
-    user-select: text;
   }
 }

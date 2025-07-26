@@ -9,7 +9,6 @@ const Index = () => {
   const [userClickNumber, setUserClickNumber] = useState<number | null>(null);
   const [hasClicked, setHasClicked] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const milestones = [100, 1000, 10000, 100000, 1000000, 10000000, 100000000];
 
@@ -25,7 +24,6 @@ const Index = () => {
     const savedClickState = localStorage.getItem('hasClicked');
     const savedClickNumber = localStorage.getItem('userClickNumber');
     const savedTotalClicks = localStorage.getItem('totalClicks');
-    const savedTheme = localStorage.getItem('isDarkMode');
     
     if (savedClickState === 'true') {
       setHasClicked(true);
@@ -37,10 +35,6 @@ const Index = () => {
     } else {
       // Временно устанавливаем 99 для демонстрации конфетти при достижении 100
       setTotalClicks(99);
-    }
-    
-    if (savedTheme) {
-      setIsDarkMode(savedTheme === 'true');
     }
 
     const interval = setInterval(() => {
@@ -81,54 +75,20 @@ const Index = () => {
     setTimeout(() => setIsAnimating(false), 600);
   };
 
-  const toggleTheme = () => {
-    const newTheme = !isDarkMode;
-    setIsDarkMode(newTheme);
-    localStorage.setItem('isDarkMode', newTheme.toString());
-  };
-
   return (
-    <div className={`min-h-screen font-inter transition-colors duration-300 ${
-      isDarkMode 
-        ? 'bg-gradient-to-br from-slate-900 to-slate-800' 
-        : 'bg-gradient-to-br from-slate-50 to-slate-100'
-    }`}>
-      {/* Переключатель темы */}
-      <div className="absolute top-4 right-4 z-10">
-        <Button
-          onClick={toggleTheme}
-          variant="outline"
-          size="sm"
-          className={`rounded-full p-2 ${
-            isDarkMode 
-              ? 'bg-slate-800 border-slate-600 text-slate-200 hover:bg-slate-700' 
-              : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
-          }`}
-        >
-          <Icon name={isDarkMode ? 'Sun' : 'Moon'} size={18} />
-        </Button>
-      </div>
-      
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 font-inter">
       <div className="container mx-auto px-4 py-16">
         <div className="text-center max-w-4xl mx-auto">
 
 
           <div className="mb-12">
-            <Card className={`inline-block p-12 backdrop-blur-sm shadow-xl transition-colors duration-300 ${
-              isDarkMode 
-                ? 'bg-slate-800/80 border-slate-600' 
-                : 'bg-white/80 border-slate-200'
-            }`}>
+            <Card className="inline-block p-12 bg-white/80 backdrop-blur-sm border-slate-200 shadow-xl">
               <CardContent className="p-0">
                 <div className="mb-6">
-                  <div className={`text-6xl font-bold text-primary mb-2 font-inter ${
-                    isDarkMode ? 'text-blue-400' : ''
-                  }`}>
+                  <div className="text-6xl font-bold text-primary mb-2 font-inter">
                     {totalClicks.toLocaleString()}
                   </div>
-                  <div className={`font-open-sans ${
-                    isDarkMode ? 'text-slate-300' : 'text-slate-600'
-                  }`}>
+                  <div className="text-slate-600 font-open-sans">
                     всего нажатий
                   </div>
                 </div>
@@ -153,19 +113,11 @@ const Index = () => {
 
                 {userClickNumber && (
                   <div className="mt-6 animate-fade-in">
-                    <div className={`rounded-xl p-4 border transition-colors duration-300 ${
-                      isDarkMode 
-                        ? 'bg-blue-400/10 border-blue-400/20' 
-                        : 'bg-primary/10 border-primary/20'
-                    }`}>
-                      <div className={`text-2xl font-bold mb-1 font-inter ${
-                        isDarkMode ? 'text-blue-400' : 'text-primary'
-                      }`}>
+                    <div className="bg-primary/10 rounded-xl p-4 border border-primary/20">
+                      <div className="text-2xl font-bold text-primary mb-1 font-inter">
                         #{userClickNumber.toLocaleString()}
                       </div>
-                      <div className={`font-open-sans ${
-                        isDarkMode ? 'text-slate-300' : 'text-slate-700'
-                      }`}>
+                      <div className="text-slate-700 font-open-sans">
                         Твой номер среди всех нажавших
                       </div>
                     </div>
