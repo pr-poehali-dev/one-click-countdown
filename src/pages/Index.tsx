@@ -2,12 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
+import confetti from 'canvas-confetti';
 
 const Index = () => {
   const [totalClicks, setTotalClicks] = useState(0);
   const [userClickNumber, setUserClickNumber] = useState<number | null>(null);
   const [hasClicked, setHasClicked] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  const milestones = [100, 1000, 10000, 100000, 1000000, 10000000, 100000000];
+
+  const triggerConfetti = () => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  };
 
   useEffect(() => {
     const savedClickState = localStorage.getItem('hasClicked');
@@ -25,7 +36,14 @@ const Index = () => {
 
     const interval = setInterval(() => {
       const currentTotal = Number(localStorage.getItem('totalClicks') || '0');
-      setTotalClicks(currentTotal + Math.floor(Math.random() * 3));
+      const newTotal = currentTotal + Math.floor(Math.random() * 3);
+      
+      // Проверяем достижение вехи
+      if (milestones.includes(newTotal)) {
+        triggerConfetti();
+      }
+      
+      setTotalClicks(newTotal);
     }, 2000);
 
     return () => clearInterval(interval);
@@ -37,6 +55,11 @@ const Index = () => {
     setIsAnimating(true);
     const newTotal = totalClicks + 1;
     const clickNumber = newTotal;
+    
+    // Проверяем достижение вехи при клике пользователя
+    if (milestones.includes(newTotal)) {
+      triggerConfetti();
+    }
     
     setTotalClicks(newTotal);
     setUserClickNumber(clickNumber);
