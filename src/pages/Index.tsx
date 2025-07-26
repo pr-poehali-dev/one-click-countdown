@@ -104,18 +104,15 @@ const Index = () => {
 
 
           <div className="mt-16 text-center">
-            <div className="inline-flex items-center gap-3 bg-white/60 backdrop-blur-sm rounded-full px-6 py-3 border border-slate-200">
-              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-            </div>
-            
-            <div className="mt-4">
+            <div>
               <a 
                 href="https://youtube.com/@somsom-v_1.0" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-slate-600 hover:text-primary transition-colors font-open-sans"
+                className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
-                <Icon name="Youtube" size={20} />
+                <Icon name="Youtube" size={24} />
+                YouTube
               </a>
             </div>
           </div>
