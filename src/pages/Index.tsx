@@ -32,6 +32,9 @@ const Index = () => {
     
     if (savedTotalClicks) {
       setTotalClicks(Number(savedTotalClicks));
+    } else {
+      // Временно устанавливаем 99 для демонстрации конфетти при достижении 100
+      setTotalClicks(99);
     }
 
     const interval = setInterval(() => {
